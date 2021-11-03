@@ -31,7 +31,8 @@ def extract_features(data):
     vectors = np.zeros((len(data)-1,3))
     for i in range(len(data)-1):
         vectors[i] = data[i+1] - data[i]
-    return np.hstack(v)
+    return np.hstack(vectors)
+
 if __name__ == "__main__":
   label = "SCHILDPAD-Bhanden" #label to study
   body_hist = []

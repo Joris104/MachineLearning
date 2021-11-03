@@ -24,13 +24,21 @@ def plt_log10_hist(hist, title):
     axs[i].hist(np.log10(hist[:,i]),[-6,-5,-4,-3,-2,-1,0])
     axs[i].set_title(XYZ[i])
   fig.suptitle(title)
-    
+  plt.show()
+
+def extract_features(data):
+    data= np.array(data)
+    vectors = np.zeros((len(data)-1,3))
+    for i in range(len(data)-1):
+        vectors[i] = data[i+1] - data[i]
+    return np.hstack(v)
 if __name__ == "__main__":
   label = "SCHILDPAD-Bhanden" #label to study
   body_hist = []
   face_hist = []
   lhand_hist = []
   rhand_hist = []
+  train_samples = utils_for_students.load_dataset_stage2('data/stage2_labels_train.csv', 'train')
   for sample in train_samples:
     if not sample["label"] == label:
       continue

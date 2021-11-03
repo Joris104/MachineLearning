@@ -1,15 +1,15 @@
 import math
 import numpy as np
 
-def extract_features(pose_sequence, m=3):
+def extract_features(pose_sequence, s=1, m=3):
     
     n = pose_sequence.shape[1]
-    data = np.zeros((sum(range(m+1)), n, pose_sequence.shape[2]))
+    data = np.zeros((sum(range(s,m+1)), n, pose_sequence.shape[2]))
     
-    for i in range(m):
+    for i in range(s-1,m):
         layer = i + 1
         num_avgs = layer
-        offset = sum(range(layer))
+        offset = sum(range(layer)) - sum(range(s))
         
         for j in range(num_avgs):
             head = j * pose_sequence.shape[0] / num_avgs
@@ -28,4 +28,4 @@ def extract_features(pose_sequence, m=3):
                 else:
                     data[j+offset,k] += pose_sequence[head_idx,k]
 
-    return data.reshape(sum(range(m+1)) * n * pose_sequence.shape[2])
+    return data.reshape(sum(range(s,m+1)) * n * pose_sequence.shape[2])

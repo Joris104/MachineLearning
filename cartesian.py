@@ -5,9 +5,6 @@ def extract_features(pose_sequence):
     """
      Function for checking the actual added value of transforming to polar coordinates
     """
-    def transform_coordinate(coordinate):
-        polar = [coordinate[0], coordinate[1], coordinate[2]]
-        return polar
     
     features = []
     if len(pose_sequence) > 1:
@@ -29,13 +26,11 @@ def extract_features(pose_sequence):
         #transform coordinates
         for half in [first_half, second_half]:
             for coordinate in half:
-                polar = transform_coordinate(coordinate)
-                features.extend(polar)
+                features.extend(coordinate)
     else:
         #if one frame add 2 times
         for i in range(0, 2):
             for coordinate in pose_sequence[0]:
-                polar = transform_coordinate(coordinate)
-                features.extend(polar)
+                features.extend(coordinate)
                 
     return features

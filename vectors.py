@@ -7,7 +7,20 @@ import matplotlib.pyplot as plt
 
 import utils_for_students
 
-
+def extract_features(pose_sequence):
+    NUM_SLICES = 2 #TODO : inspect how performance changes with more slices
+    size = len(pose_sequence[0])*len(pose_sequence[0][0]) # number of keypoints * number of values per keypoint
+    poses = np.array_split(pose_sequence,NUM_SLICES) #some of these may be empty
+    features = pose_sequence[0] #save the initial position
+    for p in poses:
+        if len(p) == 0:
+            vector = np.zeros(size)
+        else:
+            vector = p[-1] - p[0]
+        features  = np.append(features, vector)
+    features = features.reshape(-1)
+    features[abs(features) > 0.2] = 0.0
+    return features
 
 def to_vector(keypoints):
     #returns the vectors, of length one less than incoming keypoints

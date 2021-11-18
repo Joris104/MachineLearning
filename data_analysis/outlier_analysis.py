@@ -1,10 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import os
+import os,sys
+import sys, os, inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
 
-import utils_for_students
-
-from vectors import to_vector
+from utils_general import utils_for_students
+from utils_feature_preprocessing.vectors import to_vector
 
 
 data = {}

@@ -8,3 +8,10 @@ def remove_face(pose_sequence):
         sliced_pose = np.concatenate((pose_part_1, pose_part_2))
         sliced_pose_sequence.append(sliced_pose)
     return np.array(sliced_pose_sequence)
+
+def remove_face_and_hands(pose_sequence):
+    sliced_pose_sequence = []
+    for pose in pose_sequence:
+        sliced_pose = pose[0:23]
+        sliced_pose_sequence.append(sliced_pose)
+    return np.array(sliced_pose_sequence)

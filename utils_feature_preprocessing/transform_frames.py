@@ -1,6 +1,6 @@
 import numpy as np
 
-def split_features_into_frames(pose_sequence, k=2):
+def transform_to_k_frames(pose_sequence, k=2):
     if k < 1 or not pose_sequence.shape[0]:
         raise AttributeError
 
@@ -27,7 +27,9 @@ def split_features_into_frames(pose_sequence, k=2):
             slice_end += 1
         frame = np.mean(pose_sequence[slice_start:slice_end], axis=0)
         new_pose_sequence.append(frame)
-    new_pose_sequence = np.stack(new_pose_sequence).reshape(-1)
     new_pose_sequence = np.nan_to_num(new_pose_sequence)
 
     return new_pose_sequence
+
+def frames_to_features(pose_sequence):
+    return np.stack(pose_sequence).reshape(-1)

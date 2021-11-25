@@ -11,7 +11,7 @@ sys.path.insert(0, parentdir)
 
 
 from utils_general import utils_for_students
-from utils_feature_preprocessing import split_features_into_frames
+from utils_feature_preprocessing.transform_frames import frames_to_features, transform_to_k_frames
 
 def to_vector(keypoints):
     #returns the vectors, of length one less than incoming keypoints
@@ -24,7 +24,8 @@ def to_vector(keypoints):
 def extract_features(pose_sequence):
     NUM_SLICES = 2 #TODO : inspect how performance changes with more slices
     size = len(pose_sequence[0])*len(pose_sequence[0][0]) # number of keypoints * number of values per keypoint
-    pose_sequence = split_features_into_frames(pose_sequence, NUM_SLICES)
+    pose_sequence = transform_to_k_frames(pose_sequence, NUM_SLICES)
+    pose_sequence = frames_to_features(pose_sequence)
     poses = np.array_split(pose_sequence,NUM_SLICES) #some of these may be empty
     features = poses[0] #save the initial position
     #here you cut to much information, in the middle of the video we are not necessarily on the same position

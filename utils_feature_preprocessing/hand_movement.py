@@ -14,11 +14,10 @@ def hand_movement(keypoints):
     
     lhand_mov = np.abs(np.diff(lhand, axis=0))
     rhand_mov = np.abs(np.diff(rhand, axis=0))
-    #print(lhand_mov)
     lhand_mov = np.sum(lhand_mov, axis=0)
     lhand_mov = np.sum(lhand_mov, axis=0)
     rhand_mov = np.sum(rhand_mov, axis=0)
-    #print(rhand_mov)
     rhand_mov = np.sum(rhand_mov, axis=0)
-    #print(rhand_mov)
-    return lhand_mov[:2], rhand_mov[:2]
+
+    hand_mov = lhand_mov + rhand_mov
+    return np.concatenate((hand_mov, lhand_mov, rhand_mov))

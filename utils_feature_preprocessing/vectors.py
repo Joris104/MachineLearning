@@ -16,7 +16,7 @@ from utils_feature_preprocessing.transform_frames import frames_to_features, tra
 def to_vector(keypoints):
     #returns the vectors, of length one less than incoming keypoints
     l = len(keypoints)
-    vector = np.empty((l-1,125,3))
+    vector = np.empty((keypoints.shape[0]-1,keypoints.shape[1],keypoints.shape[2]))
     for i in range(1,l):
         vector[i-1] = keypoints[i] - keypoints[i-1]
     return vector

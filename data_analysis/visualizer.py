@@ -17,7 +17,10 @@ def visualizer(l1, l2, train_samples, y_train, y_pred):
 		seq = utils_for_students.load_sample_stage2(os.path.join('data/stage2/train/', sample['path']))
 		fig, axs = plt.subplots(1, len(seq),figsize=(30,5))
 		for i in range(len(seq)):
-			axis = axs[i]
+            if(len(seq)>1:
+                axis = axs[i]
+            else:
+                axis=axs
 			utils_for_students.visualize_pose(seq[i], axis)
 
 	#for idx in indices_true[6:7]:

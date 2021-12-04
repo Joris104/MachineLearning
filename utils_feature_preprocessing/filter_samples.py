@@ -29,11 +29,11 @@ def get_distance_hands_on_wrists(frame):
     HAND_WRISTS = [83,104]
     BODY_WRISTS = [15,16]
     dist_vect_left = frame[HAND_WRISTS[0]] - frame[BODY_WRISTS[0]]
-    dist_vect_right = frame[HAND_WRISTS[1]] - frame[BODY_WRISTS[2]]
+    dist_vect_right = frame[HAND_WRISTS[1]] - frame[BODY_WRISTS[1]]
     return np.linalg.norm(dist_vect_left), np.linalg.norm(dist_vect_right)
 
 
-def is_hand_not_on_wrist(frame, threshold = 0.05):
+def is_hand_not_on_wrist(frame, threshold = 0.1):
     if len(frame.shape) > 2:
         raise ValueError("parameter should be frame (not a pose_sequence)")
     dist_left, dist_right = get_distance_hands_on_wrists(frame)
@@ -45,7 +45,7 @@ def is_bad_sample(pose_sequence):
     for frame in pose_sequence:
         if any(is_body_part_missing(frame, include_face=False)):
             return True
-        if is_hand_not_on_wrist(frame):
-            return True
+        # if is_hand_not_on_wrist(frame):
+        #     return True
     return False
     

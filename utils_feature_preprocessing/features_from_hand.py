@@ -40,7 +40,10 @@ def extract_finger_curviness(pose_sequence):
                     start_point = joint_point
                 # Calculate distance from wrist to top of finger
                 wrist_to_top_dist = np.linalg.norm(wrist_point - start_point) # start_point is top now
-                features_per_hand.append(wrist_to_top_dist/finger_dist)
+                if finger_dist < 0.0001:
+                    features_per_hand.append(0) 
+                else:
+                    features_per_hand.append(wrist_to_top_dist/finger_dist)
             features_per_frame.extend(features_per_hand)
         extra_features.append(features_per_frame)
     return np.array(extra_features)

@@ -15,3 +15,4 @@ def remove_face_and_hands(pose_sequence):
         sliced_pose = pose[0:23]
         sliced_pose_sequence.append(sliced_pose)
     return np.array(sliced_pose_sequence)
+

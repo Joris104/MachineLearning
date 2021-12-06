@@ -5,14 +5,14 @@ def minimumFingerEye(sequence):
     minimum = 9999
     for frame in sequence:
         #distance left eye <-> left index finger
-        leftEye = frame[2]
-        leftIndexFinger = frame[91]
+        leftEye = frame[2][:2]
+        leftIndexFinger = frame[91][:2]
         d = np.linalg.norm(leftEye - leftIndexFinger)
         if d < minimum:
             minimum = d
         #distance right eye <-> right index finger
-        rightEye = frame[5]
-        rightIndexFinger = frame[112]
+        rightEye = frame[5][:2]
+        rightIndexFinger = frame[112][:2]
         d = np.linalg.norm(rightEye - rightIndexFinger)
         if d < minimum:
             minimum = d

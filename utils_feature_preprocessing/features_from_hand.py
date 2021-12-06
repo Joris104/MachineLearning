@@ -81,7 +81,7 @@ def extract_arm_orientations(pose_sequence):
             wrist = pose_sequence[FRAME_INDEX][indices[1]]
             features_per_frame.extend(_get_orientation(elbow, wrist))
         extra_features.append(features_per_frame)
-    return extra_features
+    return np.array(extra_features)
 
 def extract_wrist_orientations(pose_sequence):
     extra_features = []
@@ -92,7 +92,7 @@ def extract_wrist_orientations(pose_sequence):
             knuckles = np.mean([pose_sequence[FRAME_INDEX][indices[1]],pose_sequence[FRAME_INDEX][indices[2]]], axis=0)
             features_per_frame.extend(_get_orientation(wrist, knuckles))
         extra_features.append(features_per_frame)
-    return extra_features
+    return np.array(extra_features)
 
 
 def _get_orientation(start_point, end_point):

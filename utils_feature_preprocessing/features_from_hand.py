@@ -46,7 +46,18 @@ def extract_finger_curviness(pose_sequence):
                     features_per_hand.append(wrist_to_top_dist/finger_dist)
             features_per_frame.extend(features_per_hand)
         extra_features.append(features_per_frame)
-    return np.array(extra_features)
+
+    curviness = np.array(extra_features)
+
+    extremes_range = []
+    curviness = np.transpose(curviness)
+    for i in range(0, curviness.shape[0]):
+        numbers = curviness[i, ~np.isnan(curviness[i])]
+        if numbers.shape[0] > 0:
+            extremes_range.append(max(numbers)-min(numbers))
+        else:
+            extremes_range.append(0)
+    return extremes_range
 
 def extract_average_hands(pose_sequence):
     HAND_STARTPOINTS = [83,104]

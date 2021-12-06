@@ -1,5 +1,27 @@
 import numpy as np
 
+
+def select_frames(sequence, start, end):
+    if (start < 0 and end < 0):
+        #notice that in this case start = -1 means till last element, therefore the plus one
+        if (sequence.shape[0] >= -end):
+            selected = sequence[sequence.shape[0]+end:sequence.shape[0]+start+1]
+        elif (sequence.shape[0] > -start):
+            selected = sequence[:sequence.shape[0]+start+1]
+        else:
+            selected = sequence
+    elif (start >= 0 and end >= 0):
+        if (sequence.shape[0] >= end):
+            selected = sequence[start:end]
+        elif (sequence.shape[0] > start):
+            selected = sequence[start:]
+        else:
+            selected = sequence
+    else:
+        raise ValueError("inconsistent indexing")
+
+    return transform_to_k_frames(selected, k=1)
+
 def transform_to_k_frames(pose_sequence, k=2):
     if k < 1 or not pose_sequence.shape[0]:
         raise AttributeError

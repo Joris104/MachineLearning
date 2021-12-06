@@ -1,6 +1,6 @@
 import numpy as np
 from utils_feature_preprocessing.transform_frames import transform_to_k_frames, frames_to_features
-from utils_feature_preprocessing.straighten_pose import rotate_seq
+from utils_feature_preprocessing.straighten_pose_old import rotate_seq
 from utils_general.utils_for_students import HAND_CONNECTIONS
 
 def pose_hand(pose_sequence):

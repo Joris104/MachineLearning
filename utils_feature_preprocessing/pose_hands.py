@@ -2,6 +2,7 @@ import numpy as np
 from utils_feature_preprocessing.transform_frames import transform_to_k_frames, frames_to_features
 from utils_feature_preprocessing.straighten_pose_old import rotate_seq
 from utils_general.utils_for_students import HAND_CONNECTIONS
+from utils_feature_preprocessing.transform_frames import select_frames
 
 def drop_unknown_hands(hands):
     filtered = []
